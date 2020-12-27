@@ -1,2 +1,2 @@
 # INFOF409-project
-The best project so far.
+The best `project` so far.
