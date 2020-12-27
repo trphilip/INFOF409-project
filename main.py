@@ -104,11 +104,17 @@ def simulateGeneration(wealthR, wealthP, strategiesR, strategiesP, games, rounds
     payoffsR, payoffsP = np.zeros(numberOfRichs), np.zeros(numberOfPoors)  # the payoff earned by each player
     frequencyR, frequencyP = np.zeros(numberOfRichs), np.zeros(numberOfPoors)
 
+
     for _ in range(games):
-        playerA, playerB = np.random.randint(0, numberOfRichs+1), np.random.randint(0, numberOfPoors+1)
-        stateA, stateB = 'P' if np.random.random() < 0.5 else 'R', 'P' if np.random.random() < 0.5 else 'R'
+        #playerA, playerB = np.random.randint(0, numberOfRichs+1), np.random.randint(0, numberOfPoors+1)
+        #stateA, stateB = 'P' if np.random.random() < 0.5 else 'R', 'P' if np.random.random() < 0.5 else 'R'
+        playerA, playerB = np.random.choice(numberOfRichs + numberOfPoors, size=2, replace=False)
+        stateA = 'R' if playerA < numberOfRichs else 'P'
+        stateB = 'R' if playerB < numberOfRichs else 'P'
         if stateA == 'P':
+            playerA -= numberOfRichs
             if stateB == 'P':
+                playerB -= numberOfRichs
                 payoffA, payoffB = play(wealthP[playerA], strategiesP[playerA], wealthP[playerB], strategiesP[playerB], rounds)
                 payoffsP[playerB] += payoffB
                 frequencyP[playerB] += 1
@@ -120,6 +126,7 @@ def simulateGeneration(wealthR, wealthP, strategiesR, strategiesP, games, rounds
             frequencyP[playerA] += 1
         else:
             if stateB == 'P':
+                playerB -= numberOfRichs
                 payoffA, payoffB = play(wealthR[playerA], strategiesR[playerA], wealthP[playerB], strategiesP[playerB], rounds)
                 payoffsP[playerB] += payoffB
                 frequencyP[playerB] += 1
@@ -130,11 +137,13 @@ def simulateGeneration(wealthR, wealthP, strategiesR, strategiesP, games, rounds
             payoffsR[playerA] += payoffA
             frequencyR[playerA] += 1
 
-    fitnessR = np.zeros(int(m/2))
-    fitnessP = np.zeros(int(m/2))
-    for player in range(int(m/2)):
+    fitnessR = np.zeros(numberOfRichs)
+    fitnessP = np.zeros(numberOfPoors)
+    for player in range(numberOfRichs):
         fitnessR[player] = np.exp(payoffsR[player] / max(frequencyR[player], 1))
+    for player in range(numberOfPoors):
         fitnessP[player] = np.exp(payoffsP[player] / max(frequencyP[player], 1))
+    print(sum(payoffsP))
     return fitnessR, fitnessP
 
 
@@ -186,8 +195,18 @@ def experience(generations):
         fitnessR, fitnessP = simulateGeneration(initialWealthR, initialWealthP, strategiesR, strategiesP, 500, rho, i)
         distributionR = getDistribution(fitnessR)
         distributionP = getDistribution(fitnessP)
-        strategiesR = np.random.choice(strategiesR, numberOfRichs, distributionR)
-        strategiesP = np.random.choice(strategiesP, numberOfPoors, distributionP)
+
+        indexStrategiesR = np.random.choice(numberOfRichs, size=numberOfRichs, p=distributionR)
+        newStrategiesR = [0] * numberOfRichs
+        for j in range(numberOfRichs):
+            newStrategiesR[j] = strategiesR[indexStrategiesR[j]]
+        strategiesR = newStrategiesR
+
+        indexStrategiesP = np.random.choice(numberOfPoors, size=numberOfPoors, p=distributionP)
+        newStrategiesP = [0] * numberOfPoors
+        for j in range(numberOfPoors):
+            newStrategiesP[j] = strategiesP[indexStrategiesP[j]]
+        strategiesP = newStrategiesP
         # nouvelle generation
         #  pick up m strategies according to their fitness, otherwhise random
         #  if p <= mu:
@@ -206,13 +225,13 @@ if __name__ == '__main__':
     alphaR = 0.2
     alphaP = 0.2
     probabilityOfCatastrophe = np.full(rho, 0.2)
-    experiments = 1
+    experiments = 100
     numberOfRichs = 10
     numberOfPoors = 10
-    totalPayoffsR = np.zeros(experiments)
-    totalPayoffsP = np.zeros(experiments)
+    #totalPayoffsR = np.zeros(experiments)
+    #totalPayoffsP = np.zeros(experiments)
     experience(experiments)
-    print(totalPayoffsR)
-    print(totalPayoffsP)
+    #print(totalPayoffsR)
+    #print(totalPayoffsP)
 
     print('Hello Giulia')
