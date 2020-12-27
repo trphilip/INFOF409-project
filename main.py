@@ -98,7 +98,18 @@ def simulateGeneration(initialWealth, strategies):
     commonWealth = 0
     lamda1 = 0.1 #  to adapt
     probabilityOfCatastrophe = 0.1 #  the probability that a catastrophe occurs at each round
-    for step in range(rho):
+
+    # for _ in range(games)
+        #pickup 2 players
+        # for _ in range(rounds):
+            # play between them
+        # store their final payoff
+    #for each player
+        #average their payoff on the number of game they have played
+    # those payoffs give the probability that their strategy is copied at the next generation
+
+
+"""
         #  determine the gift of each player
         gifts = getProportions(commonWealth, strategies) * wealth #  gifts now contains the gift of all the players
         givenGifts += gifts
@@ -113,7 +124,7 @@ def simulateGeneration(initialWealth, strategies):
         #  determine payoffs
         payoffs += getPayoff(initialWealth, givenGifts, probabilityOfCatastrophe)
     return payoffs / rho
-
+"""
 def getFitness(payoffs):
     """
     returns the fitness distribution according to the payoffs earned
