@@ -5,10 +5,22 @@ def initWealth(amountOfIndividuals):
     """
     generates the initial wealth of each individuals
     :param amountOfIndividuals: amount of individuals
-    :return: the initial wealth of each individuals as np array
+    :return: the initial wealth of each individual as np-array
     """
-    return np.ones(amountOfIndividuals)
+    return np.full(amountOfIndividuals, 100, dtype=np.float64)
 
+def initStrategies(amountOfIndividuals):
+    """
+    generates the initial stategies of each individuals
+    :param amountOfIndividuals: amount of individuals
+    :returns: the initial strategy of each individual as np-array
+    """
+    strategies = np.zeros((amountOfIndividuals, 3))
+    for i in range(m):
+        strategies[i][0] = np.random.random()*maxWealth
+        strategies[i][1] = np.random.random()
+        strategies[i][2] = np.random.random()
+    return strategies
 
 def getPCR1(contribution, l1, initialWealthTotal):
     """
@@ -64,10 +76,10 @@ def getProportions(commonWealth, strategies):
     """
     proportions = np.zeros(m)
     for i in range(m):
-        proportion[i] = getParticipation(commonWealth, strategies[i][0], strategies[i][1], strategies[i][2])
+        proportions[i] = getParticipation(commonWealth, strategies[i][0], strategies[i][1], strategies[i][2])
     return proportions
 
-def getPayoff(initialWealth, givenGifts, probability)
+def getPayoff(initialWealth, givenGifts, probability):
     """
     returns the payoff for every player, defined as their remaining wealth depending on the probability that an
     loss occurs
@@ -81,15 +93,16 @@ def getPayoff(initialWealth, givenGifts, probability)
 def simulateGeneration(initialWealth, strategies):
     payoffs = np.zeros(m) #  the payoff earned by each player
     initialWealthTotal = np.sum(initialWealth)
-    wealth = no.copy(initialWealth)
+    wealth = np.copy(initialWealth)
     givenGifts = np.zeros(m)  #  the amount donated by each player
     commonWealth = 0
     lamda1 = 0.1 #  to adapt
     probabilityOfCatastrophe = 0.1 #  the probability that a catastrophe occurs at each round
     for step in range(rho):
         #  determine the gift of each player
-        gifts = getParticipation(commonWealth, strategies) * initialWealth #  gifts now contains the gift of all the players
+        gifts = getProportions(commonWealth, strategies) * wealth #  gifts now contains the gift of all the players
         givenGifts += gifts
+        wealth -= gifts
         #  add it to commonwealth
         commonWealth += np.sum(gifts)
         #  get probability of loss
@@ -98,28 +111,40 @@ def simulateGeneration(initialWealth, strategies):
         if np.random.random() <= probabilityOfLoss:
             wealth = wealth - alpha * wealth
         #  determine payoffs
-        payoff += getPayoff(initialWealth, givenGifts, probabilityOfCatastrophe)
-    return payoff / rho
+        payoffs += getPayoff(initialWealth, givenGifts, probabilityOfCatastrophe)
+    return payoffs / rho
+
+def getFitness(payoffs):
+    """
+    returns the fitness distribution according to the payoffs earned
+    :param payoffs: the earned payoff
+    :return: the fitness distribution
+    """
+    totalPayoff = np.sum(payoffs)
+    return (np.exp(payoffs))/np.exp(totalPayoff)
 
 def experience(generations):
-    #  Average the contribtuion according to lambda for each PCR function, depen
+    strategies = initStrategies(m)
     for i in range(generations):
         #  pick up m strategies according to their fitness, otherwhise random
         #  if p <= mu:
             #  update tau's value for each player (add a gaussian error N(tau, sigma))
         #  if p2 <= mu:
             #  update a, b values for each player (pick value in an uniform distribution between 0 and 1)
-        initialWeath = initWealth(m)  # wealth
-        simulateGeneration(initialWealth)
+        initialWealth = initWealth(m)  # wealth
+        print(initialWealth)
+        payoffs = simulateGeneration(initialWealth, strategies)
+        fitness = getFitness(payoffs)
+        print(fitness)
         #  payoff_i = average payoff for this player for the entire generation
         #  strategy's quality = e(w_i_final)/sum(exp(w_i's_final))
 
 if __name__ == '__main__':
-    m = 3  # individuals
+    m = 10  # individuals
     rho = 50  # rounds
     alpha = 0.1  # potentially removed fraction from commonwealth (sorry elisabeth)
-
-
+    maxWealth = 10*100 #  arbitrary, to adapt
+    experience(1)
 
 
     print('Hello Giulia')
