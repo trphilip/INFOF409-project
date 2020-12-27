@@ -157,11 +157,11 @@ if __name__ == '__main__':
     maxWealth = 10*100 #  arbitrary, to adapt
     #experience(1)
 
-    a = np.zeros((8, 20))
-    b = np.zeros((8, 20))
+    a = np.zeros((8, 10))
+    b = np.zeros((8, 10))
     for i in range(len(a)):
-        a[i] = np.random.poisson(1, 20)
-        b[i] = np.random.poisson(1, 20)
+        a[i] = np.random.normal(0.5, 0.1, size=10)
+        b[i] = np.random.normal(0.5, 0.1, size=10)
 
     plot.dontknowyet(a, b)
 
