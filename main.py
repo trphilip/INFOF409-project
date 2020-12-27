@@ -143,8 +143,7 @@ def simulateGeneration(wealthR, wealthP, strategiesR, strategiesP, games, rounds
         fitnessR[player] = np.exp(payoffsR[player] / max(frequencyR[player], 1))
     for player in range(numberOfPoors):
         fitnessP[player] = np.exp(payoffsP[player] / max(frequencyP[player], 1))
-    print(sum(payoffsP))
-    return fitnessR, fitnessP
+    return fitnessR, fitnessP, np.sum(payoffsR)/numberOfRichs, np.sum(payoffsP)/numberOfPoors
 
 
 def play(wealthA, strategyA, wealthB, strategyB, rounds):
@@ -188,11 +187,14 @@ def getDistribution(fitness):
 def experience(generations):
     strategiesR = initStrategies(numberOfRichs)
     strategiesP = initStrategies(numberOfPoors)
-
+    payoffsR = np.zeros(generations)
+    payoffsP = np.zeros(generations)
     for i in range(generations):
         initialWealthR = initWealth(numberOfRichs, wealthR)
         initialWealthP = initWealth(numberOfPoors, wealthP)
-        fitnessR, fitnessP = simulateGeneration(initialWealthR, initialWealthP, strategiesR, strategiesP, 500, rho, i)
+        fitnessR, fitnessP, pR, pP = simulateGeneration(initialWealthR, initialWealthP, strategiesR, strategiesP, 500, rho, i)
+        payoffsR[i] = pR
+        payoffsP[i] = pP
         distributionR = getDistribution(fitnessR)
         distributionP = getDistribution(fitnessP)
 
@@ -213,7 +215,18 @@ def experience(generations):
         #  update tau's value for each player (add a gaussian error N(tau, sigma))
         #  if p2 <= mu:
         #  update a, b values for each player (pick value in an uniform distribution between 0 and 1)
+    return payoffsR, payoffsP
 
+def averageExperiences(experiments, generations):
+    payoffR = np.zeros(generations)
+    payoffP = np.zeros(generations)
+    for experiment in range(experiments):
+        print("Experiment", experiment)
+        payoff = experience(generations)
+        payoffR += payoff[0]
+        payoffP += payoff[1]
+    print(payoffR / experiments)
+    print(payoffP / experiments)
 
 if __name__ == '__main__':
     m = 10  # individuals
@@ -221,16 +234,17 @@ if __name__ == '__main__':
     lambdaR = 1
     lambdaP = 1
     wealthP = 1
-    wealthR = 2
+    wealthR = 10
     alphaR = 0.2
     alphaP = 0.2
     probabilityOfCatastrophe = np.full(rho, 0.2)
-    experiments = 100
+    experiments = 10
+    generations = 50
     numberOfRichs = 10
     numberOfPoors = 10
     #totalPayoffsR = np.zeros(experiments)
     #totalPayoffsP = np.zeros(experiments)
-    experience(experiments)
+    averageExperiences(experiments, generations)
     #print(totalPayoffsR)
     #print(totalPayoffsP)
 
