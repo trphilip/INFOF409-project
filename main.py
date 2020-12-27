@@ -1,27 +1,25 @@
 import numpy as np
 
 
-def initWealth(amountOfIndividuals, fractionOfRich=0.5):
+def initWealth(amountOfIndividuals, wealth):
     """
     generates the initial wealth of each individuals
     :param amountOfIndividuals: amount of individuals
     :return: the initial wealth of each individual as np-array
     """
     # potentially initiated with normal distributions (for rich and poor)
-    players = np.full(amountOfIndividuals, wealthP, dtype=np.float64)
-    for i in range(int(amountOfIndividuals * fractionOfRich)):
-        players[i] = wealthR
+    players = np.full(amountOfIndividuals, wealth, dtype=np.float64)
     return players
 
 
-def initStrategies(amountOfIndividuals):
+def initStrategies(amountOfIndividuals, number):
     """
     generates the initial stategies of each individuals
     :param amountOfIndividuals: amount of individuals
     :returns: the initial strategy of each individual as np-array
     """
     strategies = np.zeros((amountOfIndividuals, 3))
-    for i in range(m):
+    for i in range(number):
         strategies[i][0] = np.random.random()
         strategies[i][1] = np.random.random()
         strategies[i][2] = np.random.random()
@@ -102,28 +100,42 @@ def getPayoff(initialWealth, givenGifts, probability):
     return (initialWealth - givenGifts) * (1 - probability)
 
 
-def simulateGeneration(wealth, strategies, games, rounds, generation):
-    payoffs = np.zeros(m)  # the payoff earned by each player
-    frequency = np.zeros(m)
+def simulateGeneration(wealthR, wealthP, strategiesR, strategiesP, games, rounds, generation):
+    payoffsR, payoffsP = np.zeros(numberOfRichs), np.zeros(numberOfPoors)  # the payoff earned by each player
+    frequencyR, frequencyP = np.zeros(numberOfRichs), np.zeros(numberOfPoors)
 
     for _ in range(games):
-        playerA, playerB = np.random.choice(m, size=2, replace=False)
-        payoffA, payoffB = play(wealth[playerA], strategies[playerA], wealth[playerB], strategies[playerB], rounds)
-        payoffs[playerA] += payoffA
-        payoffs[playerB] += payoffB
-        frequency[playerA] += 1
-        frequency[playerB] += 1
-
-    fitness = np.zeros(m)
-    for player in range(m):
-        fitness[player] = np.exp(payoffs[player] / max(frequency[player], 1))
-        if wealth[player] == wealthR:
-            totalPayoffsR[generation] += payoffs[player] / max(frequency[player], 1)
+        playerA, playerB = np.random.randint(0, numberOfRichs+1), np.random.randint(0, numberOfPoors+1)
+        stateA, stateB = 'P' if np.random.random() < 0.5 else 'R', 'P' if np.random.random() < 0.5 else 'R'
+        if stateA == 'P':
+            if stateB == 'P':
+                payoffA, payoffB = play(wealthP[playerA], strategiesP[playerA], wealthP[playerB], strategiesP[playerB], rounds)
+                payoffsP[playerB] += payoffB
+                frequencyP[playerB] += 1
+            else:
+                payoffA, payoffB = play(wealthP[playerA], strategiesP[playerA], wealthR[playerB], strategiesR[playerB], rounds)
+                payoffsR[playerB] += payoffB
+                frequencyR[playerB] += 1
+            payoffsP[playerA] += payoffA
+            frequencyP[playerA] += 1
         else:
-            totalPayoffsP[generation] += payoffs[player] / max(frequency[player], 1)
-    totalPayoffsR[generation] /= 5
-    totalPayoffsP[generation] /= 5
-    return fitness
+            if stateB == 'P':
+                payoffA, payoffB = play(wealthR[playerA], strategiesR[playerA], wealthP[playerB], strategiesP[playerB], rounds)
+                payoffsP[playerB] += payoffB
+                frequencyP[playerB] += 1
+            else:
+                payoffA, payoffB = play(wealthR[playerA], strategiesR[playerA], wealthR[playerB], strategiesR[playerB], rounds)
+                payoffsR[playerB] += payoffB
+                frequencyR[playerB] += 1
+            payoffsR[playerA] += payoffA
+            frequencyR[playerA] += 1
+
+    fitnessR = np.zeros(int(m/2))
+    fitnessP = np.zeros(int(m/2))
+    for player in range(int(m/2)):
+        fitnessR[player] = np.exp(payoffsR[player] / max(frequencyR[player], 1))
+        fitnessP[player] = np.exp(payoffsP[player] / max(frequencyP[player], 1))
+    return fitnessR, fitnessP
 
 
 def play(wealthA, strategyA, wealthB, strategyB, rounds):
@@ -160,23 +172,22 @@ def getDistribution(fitness):
     :return: the fitness distribution
     """
     totalFitness = np.sum(fitness)
-    return fitness / totalFitness
+    distribution = fitness / totalFitness
+    return distribution
 
 
 def experience(generations):
-    strategies = initStrategies(m)
+    strategiesR = initStrategies(numberOfRichs)
+    strategiesP = initStrategies(numberOfPoors)
+
     for i in range(generations):
-        initialWealth = initWealth(m)  # wealth
-        fitness = simulateGeneration(initialWealth, strategies, 500, rho, i)
-        distribution = getDistribution(fitness)
-        k = 0
-        for j in range(m):
-            if np.random.random() > distribution[j]:
-                k += 1
-                strategies[j][0] = np.random.random()
-                strategies[j][1] = np.random.random()
-                strategies[j][2] = np.random.random()
-        print(k)
+        initialWealthR = initWealth(numberOfRichs, wealthR)
+        initialWealthP = initWealth(numberOfPoors, wealthP)
+        fitnessR, fitnessP = simulateGeneration(initialWealthR, initialWealthP, strategiesR, strategiesP, 500, rho, i)
+        distributionR = getDistribution(fitnessR)
+        distributionP = getDistribution(fitnessP)
+        strategiesR = np.random.choice(strategiesR, numberOfRichs, distributionR)
+        strategiesP = np.random.choice(strategiesP, numberOfPoors, distributionP)
         # nouvelle generation
         #  pick up m strategies according to their fitness, otherwhise random
         #  if p <= mu:
@@ -191,11 +202,13 @@ if __name__ == '__main__':
     lambdaR = 1
     lambdaP = 1
     wealthP = 1
-    wealthR = 1
+    wealthR = 2
     alphaR = 0.2
     alphaP = 0.2
     probabilityOfCatastrophe = np.full(rho, 0.2)
-    experiments = 30
+    experiments = 1
+    numberOfRichs = 10
+    numberOfPoors = 10
     totalPayoffsR = np.zeros(experiments)
     totalPayoffsP = np.zeros(experiments)
     experience(experiments)
