@@ -192,7 +192,7 @@ def experience(generations):
     for i in range(generations):
         initialWealthR = initWealth(numberOfRichs, wealthR)
         initialWealthP = initWealth(numberOfPoors, wealthP)
-        fitnessR, fitnessP, pR, pP = simulateGeneration(initialWealthR, initialWealthP, strategiesR, strategiesP, 500, rho, i)
+        fitnessR, fitnessP, pR, pP = simulateGeneration(initialWealthR, initialWealthP, strategiesR, strategiesP, games, rho, i)
         payoffsR[i] = pR
         payoffsP[i] = pP
         distributionR = getDistribution(fitnessR)
@@ -213,8 +213,25 @@ def experience(generations):
         #  pick up m strategies according to their fitness, otherwhise random
         #  if p <= mu:
         #  update tau's value for each player (add a gaussian error N(tau, sigma))
+        for strategy in range(numberOfRichs):
+            print(mu)
+            if np.random.random() < mu:
+                print("Mutated tau for rich")
+                strategiesR[strategy][0] += np.random.normal(0, sigma)
+            if np.random.random() < mu:
+                print("Mutated a and b for rich")
+                strategiesR[strategy][1] = np.random.random()
+                strategiesR[strategy][2] = np.random.random()
         #  if p2 <= mu:
         #  update a, b values for each player (pick value in an uniform distribution between 0 and 1)
+        for strategy in range(numberOfPoors):
+            if np.random.random() < mu:
+                print("Mutated tau for poor")
+                strategiesP[strategy][0] += np.random.normal(0, sigma)
+            if np.random.random() < mu:
+                print("Mutated a and b for poor")
+                strategiesP[strategy][1] = np.random.random()
+                strategiesP[strategy][2] = np.random.random()
     return payoffsR, payoffsP
 
 def averageExperiences(experiments, generations):
@@ -229,19 +246,21 @@ def averageExperiences(experiments, generations):
     print(payoffP / experiments)
 
 if __name__ == '__main__':
-    m = 10  # individuals
-    rho = 4  # rounds
+    rho = 3  # rounds
+    mu = 0.03 # probability of mutation
+    sigma = 0.15 # noise added to tau if mutating
     lambdaR = 1
     lambdaP = 1
     wealthP = 1
-    wealthR = 10
+    wealthR = 4
     alphaR = 0.2
     alphaP = 0.2
-    probabilityOfCatastrophe = np.full(rho, 0.2)
+    probabilityOfCatastrophe = np.full(rho, 0.02)
     experiments = 10
-    generations = 50
-    numberOfRichs = 10
-    numberOfPoors = 10
+    generations = 100
+    numberOfRichs = 20
+    numberOfPoors = 20
+    games = ((numberOfRichs + numberOfPoors) ** 2)*3
     #totalPayoffsR = np.zeros(experiments)
     #totalPayoffsP = np.zeros(experiments)
     averageExperiences(experiments, generations)
