@@ -1,5 +1,5 @@
 import numpy as np
-
+import plot
 
 def initWealth(amountOfIndividuals):
     """
@@ -155,7 +155,14 @@ if __name__ == '__main__':
     rho = 50  # rounds
     alpha = 0.1  # potentially removed fraction from commonwealth (sorry elisabeth)
     maxWealth = 10*100 #  arbitrary, to adapt
-    experience(1)
+    #experience(1)
 
+    a = np.zeros((8, 20))
+    b = np.zeros((8, 20))
+    for i in range(len(a)):
+        a[i] = np.random.poisson(1, 20)
+        b[i] = np.random.poisson(1, 20)
+
+    plot.dontknowyet(a, b)
 
     print('Hello Giulia')
