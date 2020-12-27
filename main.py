@@ -1,10 +1,10 @@
 import numpy as np
 
 
-def initWealth(amoutOfIndividuals):
+def initWealth(amountOfIndividuals):
     """
     generates the initial wealth of each individuals
-    :param amoutOfIndividuals: amount of individuals
+    :param amountOfIndividuals: amount of individuals
     :return: the initial wealth of each individuals as np array
     """
     return np.ones(amountOfIndividuals)
