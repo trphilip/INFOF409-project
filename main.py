@@ -188,17 +188,17 @@ def experience(generations):
 if __name__ == '__main__':
     m = 10  # individuals
     rho = 4  # rounds
-    alpha = 0.1  # potentially removed fraction from commonwealth (sorry elisabeth)
     lambdaR = 1
     lambdaP = 1
     wealthP = 1
-    wealthR = 2
-    alphaR = 0.1
+    wealthR = 1
+    alphaR = 0.2
     alphaP = 0.2
-    probabilityOfCatastrophe = np.full(rho, 0.1)
-    totalPayoffsR = np.zeros(100)
-    totalPayoffsP = np.zeros(100)
-    experience(100)
+    probabilityOfCatastrophe = np.full(rho, 0.2)
+    experiments = 30
+    totalPayoffsR = np.zeros(experiments)
+    totalPayoffsP = np.zeros(experiments)
+    experience(experiments)
     print(totalPayoffsR)
     print(totalPayoffsP)
 
