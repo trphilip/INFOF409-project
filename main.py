@@ -163,6 +163,6 @@ if __name__ == '__main__':
         a[i] = np.random.normal(0.5, 0.1, size=10)
         b[i] = np.random.normal(0.5, 0.1, size=10)
 
-    plot.dontknowyet(a, b)
+    plot.variationOfLossEndowmentForRichAndPoorPlayer(a, b)
 
     print('Hello Giulia')
