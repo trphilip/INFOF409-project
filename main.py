@@ -12,14 +12,14 @@ def initWealth(amountOfIndividuals, wealth):
     return players
 
 
-def initStrategies(amountOfIndividuals, number):
+def initStrategies(amountOfIndividuals):
     """
     generates the initial stategies of each individuals
     :param amountOfIndividuals: amount of individuals
     :returns: the initial strategy of each individual as np-array
     """
     strategies = np.zeros((amountOfIndividuals, 3))
-    for i in range(number):
+    for i in range(amountOfIndividuals):
         strategies[i][0] = np.random.random()
         strategies[i][1] = np.random.random()
         strategies[i][2] = np.random.random()
