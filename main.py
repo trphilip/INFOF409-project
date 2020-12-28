@@ -181,8 +181,7 @@ def play(wealthA, strategyA, wealthB, strategyB):
             wealthA -= alphaA * wealthA
         if np.random.random() <= probabilityOfLossB:
             wealthB -= alphaB * wealthB
-    probabilityOfCatastropheA, probabilityOfCatastropheB = getPCR3(commonWealth, lambdaA, lambdaB,
-                                                                   np.sum(originalWealth))
+    probabilityOfCatastropheA, probabilityOfCatastropheB = getPCR3(commonWealth, lambdaA, lambdaB, np.sum(originalWealth))
     return getPayoff(originalWealth[0], totalGifts[0], probabilityOfCatastropheA), getPayoff(originalWealth[1], totalGifts[1], probabilityOfCatastropheB), contributionA, contributionB
 
 
@@ -227,35 +226,28 @@ def experience(generations):
         for j in range(numberOfPoors):
             newStrategiesP[j] = strategiesP[indexStrategiesP[j]]
         strategiesP = np.array(newStrategiesP)
-        # nouvelle generation
-        #  pick up m strategies according to their fitness, otherwhise random
-        #  if p <= mu:
-        #  update tau's value for each player (add a gaussian error N(tau, sigma))
         for strategy in range(numberOfRichs):
             for r in range(rho):
-                if np.random.random() < mu:
+                if np.random.random() <= mu:
                     mutations += 1
                     strategiesR[strategy][r][0] += np.random.normal(0, sigma)
-                if np.random.random() < mu:
+                if np.random.random() <= mu:
                     mutations += 1
                     strategiesR[strategy][r][1] = np.random.random()*wealthR
-                if np.random.random() < mu:
+                if np.random.random() <= mu:
                     mutations += 1
                     strategiesR[strategy][r][2] = np.random.random()*wealthR
-        #  if p2 <= mu:
-        #  update a, b values for each player (pick value in an uniform distribution between 0 and 1)
         for strategy in range(numberOfPoors):
             for r in range(rho):
-                if np.random.random() < mu:
+                if np.random.random() <= mu:
                     mutations += 1
                     strategiesP[strategy][r][0] += np.random.normal(0, sigma)
-                if np.random.random() < mu:
+                if np.random.random() <= mu:
                     mutations += 1
                     strategiesP[strategy][r][1] = np.random.random()*wealthP
-                if np.random.random() < mu:
+                if np.random.random() <= mu:
                     mutations += 1
                     strategiesP[strategy][r][2] = np.random.random()*wealthP
-    #print("Amount of mutations:", mutations/((numberOfPoors+numberOfRichs)*rho*3*generations))
     return payoffsR, payoffsP, contributionRTotal/generations, contributionPTotal/generations
 
 def averageExperiences(experiments, generations):
@@ -275,9 +267,13 @@ def averageExperiences(experiments, generations):
         payoffP += payoff[1]
         contributionR += payoff[2]
         contributionP += payoff[3]
+    print("Payoff evolution of richs")
     print(payoffR / experiments)
+    print("Payoff evolution of poors")
     print(payoffP / experiments)
+    print("Contribution of richs at each round")
     print(contributionR / experiments)
+    print("Contribution of poors at each round")
     print(contributionP / experiments)
 
 if __name__ == '__main__':
@@ -290,11 +286,11 @@ if __name__ == '__main__':
     lambdaP = 10
     wealthP = 1
     wealthR = 4
-    alphaR = 0.2
-    alphaP = 0.2
-    experiments = 5
-    generations = 300
-    games = 1000#((numberOfRichs + numberOfPoors) ** 2) * 3
+    alphaR = 1
+    alphaP = 1
+    experiments = 10
+    generations = 500
+    games = 300#((numberOfRichs + numberOfPoors) ** 2) * 3
     averageExperiences(experiments, generations)
 
     print('Hello Giulia')
