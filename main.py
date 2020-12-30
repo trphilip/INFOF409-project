@@ -162,7 +162,7 @@ def simulateGeneration(wealthR, wealthP, strategiesR, strategiesP, games, genera
     return fitnessR, fitnessP, np.sum(payoffsR)/numberOfRichs, np.sum(payoffsP)/numberOfPoors, contributionR/max(takenR, 1), contributionP/max(takenP, 1)
 
 
-def checkRiskRoundType(round, rho):
+def checkRiskRoundType(round, rho, randomRound):
     riskPossible = False
     if riskRoundType == RiskRoundType.EveryRound:
         riskPossible = True
@@ -170,19 +170,19 @@ def checkRiskRoundType(round, rho):
         riskPossible = True
     elif riskRoundType == RiskRoundType.LastRound and round == rho-1:
         riskPossible = True
-    elif riskRoundType == RiskRoundType.RandomRound and round == np.random.randint(0, rho):
+    elif riskRoundType == RiskRoundType.RandomRound and round == randomRound:
         riskPossible = True
     return riskPossible
 
 
-def checkLossEvent(commonWealth, lambdaA, lambdaB, initialWealth, round, rho):
+def checkLossEvent(commonWealth, lambdaA, lambdaB, initialWealth, round, rho, randomRound):
     """
     Check if a loss event happens in this round
     :return: True is a loss event happens, false otherwise.
     """
     lossEventA = False
     lossEventB = False
-    if checkRiskRoundType(round, rho):
+    if checkRiskRoundType(round, rho, randomRound):
         probabilityOfLossA, probabilityOfLossB = getPCR3(commonWealth, lambdaA, lambdaB, initialWealth)
         if np.random.random() <= probabilityOfLossA:
             lossEventA = True
@@ -200,6 +200,7 @@ def play(wealthA, strategyA, wealthB, strategyB):
     lambdaB = lambdaR if wealthB == wealthR else lambdaP
     alphaA = alphaR if wealthA == wealthR else alphaP
     alphaB = alphaR if wealthB == wealthR else alphaP
+    randomRound = np.random.randint(0, rho)
     for r in range(rho):
         gifts = getProportions(commonWealth, np.array([strategyA[r], strategyB[r]]), np.sum(originalWealth))
         if gifts[0] <= wealthA:
@@ -213,7 +214,7 @@ def play(wealthA, strategyA, wealthB, strategyB):
             commonWealth += gifts[1]
             wealthB -= gifts[1]
 
-        lossEventA, lossEventB = checkLossEvent(commonWealth, lambdaA, lambdaB, np.sum(originalWealth), r, rho)
+        lossEventA, lossEventB = checkLossEvent(commonWealth, lambdaA, lambdaB, np.sum(originalWealth), r, rho, randomRound)
         if lossEventA:
             wealthA -= alphaA * wealthA
             wealthB -= alphaB * wealthB
@@ -315,8 +316,8 @@ def averageExperiences(experiments, generations):
     print(contributionP / experiments)
 
 if __name__ == '__main__':
-    numberOfRichs = 10
-    numberOfPoors = 10
+    numberOfRichs = 100
+    numberOfPoors = 100
     rho = 4  # rounds
     mu = 0.03   # probability of mutation
     sigma = 0.15    # noise added to tau if mutating
@@ -326,10 +327,11 @@ if __name__ == '__main__':
     wealthR = 4
     alphaR = 1
     alphaP = 1
-    experiments = 10
+    experiments = 1
     generations = 500
     games = 300    # ((numberOfRichs + numberOfPoors) ** 2) * 3
-    riskRoundType = RiskRoundType(0)
+
+    riskRoundType = RiskRoundType(3)
     averageExperiences(experiments, generations)
 
     print('Hello Giulia')
