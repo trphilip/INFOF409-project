@@ -1,4 +1,12 @@
+import enum
 import numpy as np
+
+
+class RiskRoundType(enum.Enum):
+   EveryRound = 0
+   FirstRound = 1
+   LastRound = 2
+   RandomRound = 3
 
 
 def initWealth(amountOfIndividuals, wealth):
@@ -46,8 +54,7 @@ def getPCR2(contribution, l1, l2, initialWealthTotal):
     :param initialWealthTotal: sum of initial wealth of the individuals
     :return: loss probability at round r
     """
-    return (
-    1 - (contribution / max(1, initialWealthTotal)) ** l1, 1 - (contribution / max(1, initialWealthTotal)) ** l2)
+    return (1 - (contribution / max(1, initialWealthTotal)) ** l1, 1 - (contribution / max(1, initialWealthTotal)) ** l2)
 
 
 def getPCR3(contribution, l1, l2, initialWealthTotal):
@@ -118,7 +125,7 @@ def simulateGeneration(wealthR, wealthP, strategiesR, strategiesP, games, genera
                 contributionP += contributionB
                 takenP += 1
             else:
-                payoffA, payoffB, contributionA, contributionB  = play(wealthP[playerA], strategiesP[playerA], wealthR[playerB], strategiesR[playerB])
+                payoffA, payoffB, contributionA, contributionB = play(wealthP[playerA], strategiesP[playerA], wealthR[playerB], strategiesR[playerB])
                 payoffsR[playerB] += payoffB
                 frequencyR[playerB] += 1
                 contributionR += contributionB
@@ -155,6 +162,35 @@ def simulateGeneration(wealthR, wealthP, strategiesR, strategiesP, games, genera
     return fitnessR, fitnessP, np.sum(payoffsR)/numberOfRichs, np.sum(payoffsP)/numberOfPoors, contributionR/max(takenR, 1), contributionP/max(takenP, 1)
 
 
+def checkRiskRoundType(round, rho):
+    riskPossible = False
+    if riskRoundType == RiskRoundType.EveryRound:
+        riskPossible = True
+    elif riskRoundType == RiskRoundType.FirstRound and round == 0:
+        riskPossible = True
+    elif riskRoundType == RiskRoundType.LastRound and round == rho-1:
+        riskPossible = True
+    elif riskRoundType == RiskRoundType.RandomRound and round == np.random.randint(0, rho):
+        riskPossible = True
+    return riskPossible
+
+
+def checkLossEvent(commonWealth, lambdaA, lambdaB, initialWealth, round, rho):
+    """
+    Check if a loss event happens in this round
+    :return: True is a loss event happens, false otherwise.
+    """
+    lossEventA = False
+    lossEventB = False
+    if checkRiskRoundType(round, rho):
+        probabilityOfLossA, probabilityOfLossB = getPCR3(commonWealth, lambdaA, lambdaB, initialWealth)
+        if np.random.random() <= probabilityOfLossA:
+            lossEventA = True
+        if np.random.random() <= probabilityOfLossB:
+            lossEventB = True
+    return lossEventA, lossEventB
+
+
 def play(wealthA, strategyA, wealthB, strategyB):
     contributionA, contributionB = np.zeros(rho), np.zeros(rho)
     commonWealth = 0
@@ -176,11 +212,12 @@ def play(wealthA, strategyA, wealthB, strategyB):
             totalGifts[1] += gifts[1]
             commonWealth += gifts[1]
             wealthB -= gifts[1]
-        probabilityOfLossA, probabilityOfLossB = getPCR3(commonWealth, lambdaA, lambdaB, np.sum(originalWealth))
-        if np.random.random() <= probabilityOfLossA:
+
+        lossEventA, lossEventB = checkLossEvent(commonWealth, lambdaA, lambdaB, np.sum(originalWealth), r, rho)
+        if lossEventA:
             wealthA -= alphaA * wealthA
-        if np.random.random() <= probabilityOfLossB:
             wealthB -= alphaB * wealthB
+
     probabilityOfCatastropheA, probabilityOfCatastropheB = getPCR3(commonWealth, lambdaA, lambdaB, np.sum(originalWealth))
     return getPayoff(originalWealth[0], totalGifts[0], probabilityOfCatastropheA), getPayoff(originalWealth[1], totalGifts[1], probabilityOfCatastropheB), contributionA, contributionB
 
@@ -250,6 +287,7 @@ def experience(generations):
                     strategiesP[strategy][r][2] = np.random.random()*wealthP
     return payoffsR, payoffsP, contributionRTotal/generations, contributionPTotal/generations
 
+
 def averageExperiences(experiments, generations):
     """
     performs the experience experiments times
@@ -267,10 +305,10 @@ def averageExperiences(experiments, generations):
         payoffP += payoff[1]
         contributionR += payoff[2]
         contributionP += payoff[3]
-    print("Payoff evolution of richs")
-    print(payoffR / experiments)
-    print("Payoff evolution of poors")
-    print(payoffP / experiments)
+    # print("Payoff evolution of richs")
+    # print(payoffR / experiments)
+    # print("Payoff evolution of poors")
+    # print(payoffP / experiments)
     print("Contribution of richs at each round")
     print(contributionR / experiments)
     print("Contribution of poors at each round")
@@ -280,8 +318,8 @@ if __name__ == '__main__':
     numberOfRichs = 10
     numberOfPoors = 10
     rho = 4  # rounds
-    mu = 0.03 # probability of mutation
-    sigma = 0.15 # noise added to tau if mutating
+    mu = 0.03   # probability of mutation
+    sigma = 0.15    # noise added to tau if mutating
     lambdaR = 10
     lambdaP = 10
     wealthP = 1
@@ -290,7 +328,8 @@ if __name__ == '__main__':
     alphaP = 1
     experiments = 10
     generations = 500
-    games = 300#((numberOfRichs + numberOfPoors) ** 2) * 3
+    games = 300    # ((numberOfRichs + numberOfPoors) ** 2) * 3
+    riskRoundType = RiskRoundType(0)
     averageExperiences(experiments, generations)
 
     print('Hello Giulia')
