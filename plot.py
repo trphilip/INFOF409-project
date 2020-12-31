@@ -1,11 +1,46 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+
+def effectOfFractionLossOnContributions(riskCurves, omegaIsOne, omegaIsTwo, omegaIsFour):
+    """
+    plots the effect of fraction loss on contributions for 3 differents simulations
+    :param riskCurves: array of risk curves; size 3
+    :param omegaIsOne: array of simulations with omega = 1; size (3, 11)
+    :param omegaIsTwo: array of simulations with omega = 2; size (3, 11)
+    :param omegaIsFour: array of simulations with omega = 4; size (3, 11)
+    """
+    fig, axs = plt.subplots(2, 2, figsize=(6, 4))
+
+    x_axis = np.arange(0, 11) * 0.1
+    axs[0, 0].plot(x_axis, riskCurves[0], 'r-', x_axis, riskCurves[1], 'g-', x_axis, riskCurves[2], 'b-')
+    axs[0, 1].plot(x_axis, omegaIsOne[0], 'r-', x_axis, omegaIsOne[1], 'g-', x_axis, omegaIsOne[2], 'b-')
+    axs[1, 0].plot(x_axis, omegaIsTwo[0], 'r-', x_axis, omegaIsTwo[1], 'g-', x_axis, omegaIsTwo[2], 'b-')
+    axs[1, 1].plot(x_axis, omegaIsFour[0], 'r-', x_axis, omegaIsFour[1], 'g-', x_axis, omegaIsFour[2], 'b-')
+
+    for i in range(2):
+        for j in range(2):
+            axs[i, j].set_xlim([0, 1])
+            axs[i, j].set_ylim([0, 1])
+
+    axs[0, 0].set_title(r"Risk curves")
+    axs[0, 1].set_title(r"$\Omega = 1$")
+    axs[1, 0].set_title(r"$\Omega = 2$")
+    axs[1, 1].set_title(r"$\Omega = 4$")
+
+    for i in range(len(axs.flat)):
+        if i == 0:
+            axs.flat[i].set(ylabel="Risk probability", xlabel=r"Contribution")
+        else:
+            axs.flat[i].set(ylabel="Contribution", xlabel=r"Loss fraction $\alpha$")
+    plt.show()
+
+
 def variationOfLossEndowmentForRichAndPoorPlayer(contributionRich, contributionPoor):
     """
     plots the loss endowment for rich and poor players, x_p is constant
-    :param contributionRich: array of array of the rich's contributions depending of x_r [every round, first round, last round, random round]
-    :param contributionPoor: array of array of the poor's contributions depending of x_r [every round, first round, last round, random round]
+    :param contributionRich: array of array of the rich's contributions depending of x_r [every round, first round, last round, random round]; size(4,10)
+    :param contributionPoor: array of array of the poor's contributions depending of x_r [every round, first round, last round, random round]; size(4,10)
     """
     fig, axs = plt.subplots(2, 4, figsize=(10, 4))
 
