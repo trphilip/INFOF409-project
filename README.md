@@ -1,7 +1,7 @@
 # INFOF409-project
 The best `project` so far.
 
-50 experiments
+15 experiments
 500 games
 50 Richs 50 Poors
 1000 generations
