@@ -315,12 +315,7 @@ def averageExperiences(experiments, generations):
     print(contributionR / experiments)
     print("Contribution of poors at each round")
     print(contributionP / experiments)
-<<<<<<< HEAD
 ####################################################################################################
-=======
-
-
->>>>>>> 85b59e34375e2e80764517011089b0d1d6f1768b
 if __name__ == '__main__':
     numberOfRichs = 100
     numberOfPoors = 100
