@@ -1,6 +1,12 @@
 # INFOF409-project
 The best `project` so far.
 
+50 experiments
+500 games
+50 Richs 50 Poors
+1000 generations
+lambda3 = 10
+
 1. Figure 3
     1. Every Round
         - alphaP = 1
