@@ -310,11 +310,12 @@ def averageExperiences(experiments, generations):
     # print(payoffR / experiments)
     # print("Payoff evolution of poors")
     # print(payoffP / experiments)
+#######################################STOCKER CEUX CI##############################################
     print("Contribution of richs at each round")
     print(contributionR / experiments)
     print("Contribution of poors at each round")
     print(contributionP / experiments)
-
+####################################################################################################
 if __name__ == '__main__':
     numberOfRichs = 100
     numberOfPoors = 100
