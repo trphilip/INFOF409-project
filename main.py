@@ -315,6 +315,7 @@ def averageExperiences(experiments, generations):
     print("Contribution of poors at each round")
     print(contributionP / experiments)
 
+
 if __name__ == '__main__':
     numberOfRichs = 100
     numberOfPoors = 100
@@ -329,21 +330,9 @@ if __name__ == '__main__':
     alphaP = 1
     experiments = 1
     generations = 500
-    games = 300    # ((numberOfRichs + numberOfPoors) ** 2) * 3
+    games = 300  # ((numberOfRichs + numberOfPoors) ** 2) * 3
 
-    #riskRoundType = RiskRoundType(3)
-    #averageExperiences(experiments, generations)
-
-    a = np.zeros((4, 11))
-    b = np.zeros((4, 11))
-    c = np.zeros((4, 11))
-    d = np.zeros((4, 11))
-    for i in range(len(a)):
-        a[i] = np.random.normal(0.5, 0.1, size=11)
-        b[i] = np.random.normal(0.5, 0.1, size=11)
-        c[i] = np.random.normal(0.5, 0.1, size=11)
-        d[i] = np.random.normal(0.5, 0.1, size=11)
-
-    plot.effectOfFractionLossOnContributions(a, b, c, d)
+    riskRoundType = RiskRoundType(3)
+    averageExperiences(experiments, generations)
 
     print('Hello Giulia')
