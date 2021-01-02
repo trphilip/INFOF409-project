@@ -39,8 +39,8 @@ def effectOfFractionLossOnContributions(riskCurves, omegaIsOne, omegaIsTwo, omeg
 def variationOfLossEndowmentForRichAndPoorPlayer(contributionRich, contributionPoor):
     """
     plots the loss endowment for rich and poor players, x_p is constant
-    :param contributionRich: array of array of the rich's contributions depending of x_r [every round, first round, last round, random round]; size(4,10)
-    :param contributionPoor: array of array of the poor's contributions depending of x_r [every round, first round, last round, random round]; size(4,10)
+    :param contributionRich: array of array of the rich's contributions depending of x_r [every round, first round, last round, random round]; size(8,10)
+    :param contributionPoor: array of array of the poor's contributions depending of x_r [every round, first round, last round, random round]; size(8,10)
     """
     fig, axs = plt.subplots(2, 4, figsize=(10, 4))
 
