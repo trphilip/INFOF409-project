@@ -1,0 +1,107 @@
+ALPHA P = 1 | ALPHA R = 0.1
+Contribution of richs at each round
+[0.6170732  0.20212684 0.15381055 0.08908526]
+Contribution of poors at each round
+[0.18416127 0.08285413 0.06210897 0.03879747]
+
+ALPHA P = 1 | ALPHA R = 0.2
+Contribution of richs at each round
+[0.60977443 0.18569231 0.10881163 0.12022948]
+Contribution of poors at each round
+[0.21290911 0.07982325 0.05024086 0.04118392]
+
+ALPHA P = 1 | ALPHA R = 0.3
+Contribution of richs at each round
+[0.65695652 0.18375013 0.11707471 0.09900244]
+Contribution of poors at each round
+[0.17880934 0.08382713 0.05332302 0.0411923 ]
+
+ALPHA P = 1 | ALPHA R = 0.4
+Contribution of richs at each round
+[0.62276772 0.17321594 0.15508672 0.10196564]
+Contribution of poors at each round
+[0.19077668 0.0845851  0.05372615 0.03826148]
+
+ALPHA P = 1 | ALPHA R = 0.5
+Contribution of richs at each round
+[0.62688816 0.17252166 0.15248425 0.10059501]
+Contribution of poors at each round
+[0.18223458 0.08313954 0.05035959 0.04148562]
+
+ALPHA P = 1 | ALPHA R = 0.6
+Contribution of richs at each round
+[0.55695611 0.26361462 0.12903362 0.09765526]
+Contribution of poors at each round
+[0.20433421 0.07503369 0.05494566 0.03629988]
+
+ALPHA P = 1 | ALPHA R = 0.7
+Contribution of richs at each round
+[0.6881617  0.20600613 0.09607562 0.08228271]
+Contribution of poors at each round
+[0.16441252 0.08729201 0.05521498 0.04130195]
+
+ALPHA P = 1 | ALPHA R = 0.8
+Contribution of richs at each round
+[0.43401192 0.28981731 0.16949362 0.12305598]
+Contribution of poors at each round
+[0.18770328 0.0822838  0.05210364 0.04054557]
+
+ALPHA P = 1 | ALPHA R = 0.9
+Contribution of richs at each round
+[0.66106183 0.19772775 0.09465393 0.09294899]
+Contribution of poors at each round
+[0.19481448 0.08037001 0.04900168 0.04218038]
+
+ALPHA P = 0.5 | ALPHA R = 0.1
+Contribution of richs at each round
+[0.59961148 0.18329263 0.16547012 0.10351855]
+Contribution of poors at each round
+[0.18585446 0.07606766 0.05779352 0.04118672]
+
+ALPHA P = 0.5 | ALPHA R = 0.2
+Contribution of richs at each round
+[0.48865481 0.30596258 0.1223421  0.11393682]
+Contribution of poors at each round
+[0.20447131 0.07308555 0.05475599 0.04250067]
+
+ALPHA P = 0.5 | ALPHA R = 0.3
+Contribution of richs at each round
+[0.57656463 0.28507061 0.10490449 0.08407963]
+Contribution of poors at each round
+[0.19398879 0.08975562 0.05657769 0.04147561]
+
+ALPHA P = 0.5 | ALPHA R = 0.4
+Contribution of richs at each round
+[0.52216234 0.23605633 0.14727818 0.12605337]
+Contribution of poors at each round
+[0.19507373 0.06838017 0.05586549 0.04202842]
+
+ALPHA P = 0.5 | ALPHA R = 0.5
+Contribution of richs at each round
+[0.59438474 0.20280604 0.10552601 0.12099282]
+Contribution of poors at each round
+[0.17960997 0.08060472 0.05107941 0.04390292]
+
+ALPHA P = 0.5 | ALPHA R = 0.6
+Contribution of richs at each round
+[0.70124072 0.135973   0.12016061 0.09184114]
+Contribution of poors at each round
+[0.17316924 0.08222958 0.05786398 0.04800769]
+
+ALPHA P = 0.5 | ALPHA R = 0.7
+Contribution of richs at each round
+[0.59328997 0.19492407 0.15848042 0.08992121]
+Contribution of poors at each round
+[0.17881528 0.08671796 0.04996141 0.04387052]
+
+ALPHA P = 0.5 | ALPHA R = 0.8
+Contribution of richs at each round
+[0.55972315 0.22292168 0.1275383  0.10578714]
+Contribution of poors at each round
+[0.1749715  0.0852992  0.05606674 0.04290954]
+
+ALPHA P = 0.5 | ALPHA R = 0.9
+Contribution of richs at each round
+[0.72054218 0.18212116 0.08944455 0.08027461]
+Contribution of poors at each round
+[0.17616653 0.07950408 0.05548623 0.04245857]
