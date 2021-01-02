@@ -235,7 +235,7 @@ def experience(generations):
     strategiesR = initStrategies(numberOfRichs, wealthR)
     strategiesP = initStrategies(numberOfPoors, wealthP)
     for i in range(generations):
-        print("Generation", i)
+        if i % 100== 0: print("Generation", i)
         initialWealthR = initWealth(numberOfRichs, wealthR)
         initialWealthP = initWealth(numberOfPoors, wealthP)
         fitnessR, fitnessP, contributionR, contributionP = simulateGeneration(initialWealthR, initialWealthP, strategiesR, strategiesP, games, i)
@@ -304,9 +304,9 @@ if __name__ == '__main__':
     wealthR = 4
     experiments = 1
     generations = 5000
-    games = 300  # ((numberOfRichs + numberOfPoors) ** 2) * 3
+    games = 100  # ((numberOfRichs + numberOfPoors) ** 2) * 3
 
-    riskRoundType = RiskRoundType(3)
+    riskRoundType = RiskRoundType(2)
 
     alphaP = 1
     alphaR = 1
