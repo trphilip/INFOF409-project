@@ -314,11 +314,15 @@ if __name__ == '__main__':
     riskRoundType = RiskRoundType(3)
 
     alphaP = 1
-    alphaR = 1
-    print("Richs", numberOfRichs, "Poors", numberOfPoors, "Rho", rho, "alphaR", alphaR, "alphaP", alphaP, "experiments", experiments, "generations", generations, "games", games)
-    averageExperiences(experiments, generations)
-    #alphaP = 0.5
-    #for aR in range(10):
-        #alphaR = (aR+1)/10
-        #print("Richs", numberOfRichs, "Poors", numberOfPoors, "Rho", rho, "alphaR", alphaR, "alphaP", alphaP, "experiments", experiments, "generations", generations, "games", games)
-        #averageExperiences(experiments, generations)
+    for i in range(1, 11, 1):
+        alphaR = i/10
+        print("ALPHA P =", alphaP, "| ALPHA R =", alphaR)
+        averageExperiences(experiments, generations)
+        print()
+
+    alphaP = 0.5
+    for i in range(1, 11, 1):
+        alphaR = i/10
+        print("ALPHA P =", alphaP, "| ALPHA R =", alphaR)
+        averageExperiences(experiments, generations)
+        print()
