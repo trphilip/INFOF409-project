@@ -1,100 +1,119 @@
-Richs 50 Poors 50 Rho 4 alphaR 0.1 alphaP 1 experiments 15 generations 1000 games 500
+ALPHA P = 1 | ALPHA R = 0.1
 Contribution of richs at each round
-[0.59944921 0.24646795 0.1184442  0.11373437]
+[0.2123459  0.21953781 0.17687368 0.18325377]
 Contribution of poors at each round
-[0.17482868 0.08200328 0.04583442 0.04027154]
-Richs 50 Poors 50 Rho 4 alphaR 0.2 alphaP 1 experiments 15 generations 1000 games 500
+[0.44760008 0.01852699 0.01532653 0.01318254]
+
+ALPHA P = 1 | ALPHA R = 0.2
 Contribution of richs at each round
-[0.65685956 0.19082545 0.10794568 0.09318209]
+[0.24510545 0.16256451 0.19313591 0.16724665]
 Contribution of poors at each round
-[0.187026   0.07515626 0.04695048 0.03780478]
-Richs 50 Poors 50 Rho 4 alphaR 0.3 alphaP 1 experiments 15 generations 1000 games 500
+[0.45502653 0.01725376 0.01604071 0.01202867]
+
+ALPHA P = 1 | ALPHA R = 0.3
 Contribution of richs at each round
-[0.61634482 0.21618927 0.1464646  0.07599005]
+[0.2560184  0.19837026 0.16715465 0.16518457]
 Contribution of poors at each round
-[0.18901399 0.07802745 0.04685887 0.03604403]
-Richs 50 Poors 50 Rho 4 alphaR 0.4 alphaP 1 experiments 15 generations 1000 games 500
+[0.43056105 0.018873   0.01591312 0.01094524]
+
+ALPHA P = 1 | ALPHA R = 0.4
 Contribution of richs at each round
-[0.73419772 0.13533747 0.12419815 0.08314344]
+[0.36037989 0.16828438 0.17650555 0.15826789]
 Contribution of poors at each round
-[0.16432287 0.08669867 0.04852825 0.03832763]
-Richs 50 Poors 50 Rho 4 alphaR 0.5 alphaP 1 experiments 15 generations 1000 games 500
+[0.42754867 0.01864653 0.01627725 0.01254257]
+
+ALPHA P = 1 | ALPHA R = 0.5
 Contribution of richs at each round
-[0.66859263 0.16386224 0.11140631 0.09310218]
+[0.42339107 0.15961122 0.15786106 0.12770681]
 Contribution of poors at each round
-[0.1729331  0.07228723 0.05026997 0.03963581]
-Richs 50 Poors 50 Rho 4 alphaR 0.6 alphaP 1 experiments 15 generations 1000 games 500
+[0.418994   0.01889098 0.0137853  0.01541545]
+
+ALPHA P = 1 | ALPHA R = 0.6
 Contribution of richs at each round
-[0.68303289 0.12540825 0.12793287 0.10089118]
+[0.46021435 0.16074263 0.14006775 0.13063626]
 Contribution of poors at each round
-[0.18710059 0.075452   0.04554775 0.03535341]
-Richs 50 Poors 50 Rho 4 alphaR 0.7 alphaP 1 experiments 15 generations 1000 games 500
+[0.42855924 0.02027231 0.01759123 0.0133045 ]
+
+ALPHA P = 1 | ALPHA R = 0.7
 Contribution of richs at each round
-[0.6246566  0.22404923 0.10589365 0.09700812]
+[0.98198786 0.11909119 0.13714913 0.1076372 ]
 Contribution of poors at each round
-[0.17997453 0.0744123  0.04310641 0.03691965]
-Richs 50 Poors 50 Rho 4 alphaR 0.8 alphaP 1 experiments 15 generations 1000 games 500
+[0.40475586 0.0212963  0.01846504 0.01955231]
+
+ALPHA P = 1 | ALPHA R = 0.8
 Contribution of richs at each round
-[0.69499942 0.19008003 0.0889182  0.08287561]
+[1.68865731 0.11371756 0.12030531 0.11282387]
 Contribution of poors at each round
-[0.18087913 0.07502298 0.04827185 0.03675644]
-Richs 50 Poors 50 Rho 4 alphaR 0.9 alphaP 1 experiments 15 generations 1000 games 500
+[0.4001606  0.03786944 0.02833315 0.02405952]
+
+ALPHA P = 1 | ALPHA R = 0.9
 Contribution of richs at each round
-[0.69763857 0.1366279  0.0991563  0.08273929]
+[1.97053407 0.09495022 0.09684756 0.0731725 ]
 Contribution of poors at each round
-[0.18442294 0.07820149 0.04825469 0.03595582]
-Richs 50 Poors 50 Rho 4 alphaR 1.0 alphaP 1 experiments 15 generations 1000 games 500
+[0.37496282 0.03585406 0.03322614 0.02983073]
+
+ALPHA P = 1 | ALPHA R = 1.0
 Contribution of richs at each round
-[0.74432756 0.10021505 0.07805594 0.07710262]
+[2.17352966 0.08278341 0.08242475 0.07303144]
 Contribution of poors at each round
-[0.18545171 0.08276209 0.05259116 0.03486972]
-Richs 50 Poors 50 Rho 4 alphaR 0.1 alphaP 0.5 experiments 15 generations 1000 games 500
+[0.36284895 0.03628879 0.0395529  0.02909777]
+
+ALPHA P = 0.5 | ALPHA R = 0.1
 Contribution of richs at each round
-[0.57826099 0.24219136 0.13147633 0.1034307 ]
+[0.22030902 0.22184163 0.20626739 0.16618615]
 Contribution of poors at each round
-[0.19973627 0.07284592 0.05310374 0.04036324]
-Richs 50 Poors 50 Rho 4 alphaR 0.2 alphaP 0.5 experiments 15 generations 1000 games 500
+[0.19959929 0.0779669  0.06979874 0.06372899]
+
+ALPHA P = 0.5 | ALPHA R = 0.2
 Contribution of richs at each round
-[0.62069997 0.24157731 0.08477512 0.09536576]
+[0.31881392 0.19988107 0.18165592 0.15393602]
 Contribution of poors at each round
-[0.1909021  0.07904879 0.05703409 0.03816639]
-Richs 50 Poors 50 Rho 4 alphaR 0.3 alphaP 0.5 experiments 15 generations 1000 games 500
+[0.21253344 0.0961641  0.07466748 0.05981553]
+
+ALPHA P = 0.5 | ALPHA R = 0.3
 Contribution of richs at each round
-[0.63805847 0.16628277 0.1447499  0.09234903]
+[0.27114573 0.18558589 0.17252313 0.17268836]
 Contribution of poors at each round
-[0.18464034 0.08035173 0.05348291 0.04274643]
-Richs 50 Poors 50 Rho 4 alphaR 0.4 alphaP 0.5 experiments 15 generations 1000 games 500
+[0.20355255 0.09210716 0.076539   0.06021715]
+
+ALPHA P = 0.5 | ALPHA R = 0.4
 Contribution of richs at each round
-[0.63984907 0.19064961 0.1139943  0.09225117]
+[0.34317902 0.14714516 0.14984824 0.12022285]
 Contribution of poors at each round
-[0.18805337 0.08692104 0.05218975 0.03874698]
-Richs 50 Poors 50 Rho 4 alphaR 0.5 alphaP 0.5 experiments 15 generations 1000 games 500
+[0.22294901 0.08823787 0.06887981 0.06836348]
+
+ALPHA P = 0.5 | ALPHA R = 0.5
 Contribution of richs at each round
-[0.72827565 0.12121341 0.10898779 0.09306794]
+[0.41011806 0.1427082  0.18285872 0.10264555]
 Contribution of poors at each round
-[0.18924897 0.0853061  0.0503458  0.04162749]
-Richs 50 Poors 50 Rho 4 alphaR 0.6 alphaP 0.5 experiments 15 generations 1000 games 500
+[0.19721664 0.0744765  0.08387989 0.05767148]
+
+ALPHA P = 0.5 | ALPHA R = 0.6
 Contribution of richs at each round
-[0.57404289 0.17588375 0.13147885 0.12238025]
+[0.45286232 0.15859717 0.10758677 0.11277957]
 Contribution of poors at each round
-[0.20187237 0.07148634 0.05345694 0.03992335]
-Richs 50 Poors 50 Rho 4 alphaR 0.7 alphaP 0.5 experiments 15 generations 1000 games 500
+[0.22332294 0.08431468 0.0739843  0.0639776 ]
+
+ALPHA P = 0.5 | ALPHA R = 0.7
 Contribution of richs at each round
-[0.50725951 0.28719487 0.136432   0.08838383]
+[0.93382946 0.11815803 0.12060246 0.10650983]
 Contribution of poors at each round
-[0.1788291  0.08600766 0.05315484 0.03955026]
-Richs 50 Poors 50 Rho 4 alphaR 0.8 alphaP 0.5 experiments 15 generations 1000 games 500
+[0.2143729  0.09298036 0.0738634  0.06898833]
+
+ALPHA P = 0.5 | ALPHA R = 0.8
 Contribution of richs at each round
-[0.79227274 0.10277555 0.08487569 0.0765834 ]
+[1.50782417 0.14534644 0.08369427 0.10950443]
 Contribution of poors at each round
-[0.18685137 0.08599514 0.05678947 0.04321814]
-Richs 50 Poors 50 Rho 4 alphaR 0.9 alphaP 0.5 experiments 15 generations 1000 games 500
+[0.21421689 0.0792299  0.09561803 0.06324669]
+
+ALPHA P = 0.5 | ALPHA R = 0.9
 Contribution of richs at each round
-[0.64484466 0.13202563 0.13957015 0.08317782]
+[1.93249584 0.08295885 0.08407006 0.07330371]
 Contribution of poors at each round
-[0.21045365 0.07196877 0.04750372 0.04004272]
-Richs 50 Poors 50 Rho 4 alphaR 1.0 alphaP 0.5 experiments 15 generations 1000 games 500
+[0.22712174 0.094011   0.08930248 0.06497108]
+
+ALPHA P = 0.5 | ALPHA R = 1.0
 Contribution of richs at each round
-[0.78023341 0.10059542 0.0861868  0.06854271]
+[2.2906469  0.08601303 0.05774371 0.07631133]
 Contribution of poors at each round
-[0.21457281 0.07171806 0.04890106 0.04391002]
+[0.20981563 0.09493418 0.08278433 0.07369178]
