@@ -299,17 +299,17 @@ def averageExperiences(experiments, generations):
     print(contributionP / experiments)
 ####################################################################################################
 if __name__ == '__main__':
-    numberOfRichs = 10
-    numberOfPoors = 10
+    numberOfRichs = 20
+    numberOfPoors = 20
     rho = 4  # rounds
     mu = 0.03   # probability of mutation
     sigma = 0.15    # noise added to tau if mutating
     lambdaA = 10
     wealthP = 1
     wealthR = 4
-    experiments = 1
-    generations = 500
-    games = 300  # ((numberOfRichs + numberOfPoors) ** 2) * 3
+    experiments = 3
+    generations = 2000
+    games = 1000  # ((numberOfRichs + numberOfPoors) ** 2) * 3
 
     riskRoundType = RiskRoundType(3)
 
