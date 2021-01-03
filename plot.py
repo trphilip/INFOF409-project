@@ -36,6 +36,22 @@ def effectOfFractionLossOnContributions(riskCurves, omegaIsOne, omegaIsTwo, omeg
     plt.show()
 
 
+def riskCurve():
+    steps = 10000
+    param = 10
+
+    x_axis = np.arange(0, 1, steps**(-1))
+    y_axis = np.zeros(steps)
+    for i in range(steps):
+        y_axis[i] = (1 + (np.exp(param * (x_axis[i] - 1 / 2)))) ** (-1)
+
+    plt.plot(x_axis, y_axis, 'g-')
+    plt.title(r"Risk curve with threshold effect")
+    plt.ylabel("Risk probability")
+    plt.xlabel("Contribution")
+    plt.show()
+
+
 def variationOfLossEndowmentForRichAndPoorPlayer(contributionRich, contributionPoor):
     """
     plots the loss endowment for rich and poor players, x_p is constant

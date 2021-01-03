@@ -200,4 +200,6 @@ if __name__ == '__main__':
     plot.contributionsForDifferentTimingsOfPotentialLosses(everyRich + firstRich + lastRich + randomRich,
                                                            everyPoor + firstPoor + lastPoor + randomPoor)
 
+    plot.riskCurve()
+
     print('Hello Giulia')
