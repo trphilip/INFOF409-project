@@ -63,10 +63,11 @@ def variationOfLossEndowmentForRichAndPoorPlayer(contributionRich, contributionP
     x_axis = np.arange(1, 11) * 0.1
     for column in range(4):
         for row in range(2):
-            axs[row, column].plot(x_axis, contributionPoor[row * 4 + column], '.-',
-                                  x_axis, contributionRich[row * 4 + column], '.-')
+            axs[row, column].plot(x_axis, contributionPoor[row * 4 + column], '.-', label='Poor')
+            axs[row, column].plot(x_axis, contributionRich[row * 4 + column], '.-', label='Rich')
             axs[row, column].set_xlim([0, 1])
             axs[row, column].set_ylim([0, 1])
+            axs[row, column].legend(loc=1, prop={'size': 6})
 
             if row == 0:
                 axs[row, column].text(1, 0, r"$\alpha_{P}=1$", verticalalignment='bottom', horizontalalignment='right')
