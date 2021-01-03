@@ -53,16 +53,16 @@ def variationOfLossEndowmentForRichAndPoorPlayer(contributionRich, contributionP
             axs[row, column].set_ylim([0, 1])
 
             if row == 0:
-                axs[row, column].text(1, 0, r"$x_{P}=1$", verticalalignment='bottom', horizontalalignment='right')
+                axs[row, column].text(1, 0, r"$\alpha_{P}=1$", verticalalignment='bottom', horizontalalignment='right')
             else:
-                axs[row, column].text(1, 0, r"$x_{P}=^1/_2$", verticalalignment='bottom', horizontalalignment='right')
+                axs[row, column].text(1, 0, r"$\alpha_{P}=0.5$", verticalalignment='bottom', horizontalalignment='right')
 
     axs[0, 0].set_title(r"Every round")
     axs[0, 1].set_title(r"First round")
     axs[0, 2].set_title(r"Last round")
     axs[0, 3].set_title(r"Random round")
     for ax in axs.flat:
-        ax.set(ylabel="Contribution/wealth", xlabel=r"Loss fraction $x_{R}$")
+        ax.set(ylabel="Contribution/wealth", xlabel=r"Loss fraction $\alpha_{R}$")
         ax.label_outer()
     plt.show()
 
@@ -78,22 +78,22 @@ def contributionsForDifferentTimingsOfPotentialLosses(contributionRich, contribu
     width = 0.35
     for column in range(4):
         for row in range(4):
-            if row == 0:
-                label_x_p = r"$x_{P}=1$"
-                label_x_r = r"$x_{R}=1$"
-            elif row == 1:
-                label_x_p = r"$x_{P}=1$"
-                label_x_r = r"$x_{R}=0.8$"
-            elif row == 2:
-                label_x_p = r"$x_{P}=0.5$"
-                label_x_r = r"$x_{R}=0.8$"
+            if column == 0:
+                label_x_p = r"$\alpha_{P}=1$"
+                label_x_r = r"$\alpha_{R}=1$"
+            elif column == 1:
+                label_x_p = r"$\alpha_{P}=1$"
+                label_x_r = r"$\alpha_{R}=0.8$"
+            elif column == 2:
+                label_x_p = r"$\alpha_{P}=0.5$"
+                label_x_r = r"$\alpha_{R}=0.8$"
             else:
-                label_x_p = r"$x_{P}=0.5$"
-                label_x_r = r"$x_{R}=0.5$"
-            axs[row, column].bar(x - width / 2, contributionPoor[row * 4 + column], width, label=label_x_p)
-            axs[row, column].bar(x + width / 2, contributionRich[row * 4 + column], width, label=label_x_r)
-            axs[row, column].legend(loc=1, prop={'size': 6})
-            axs[row, column].set_ylim([0, 4])
+                label_x_p = r"$\alpha_{P}=0.5$"
+                label_x_r = r"$\alpha_{R}=0.5$"
+            axs[column, row].bar(x - width / 2, contributionPoor[row * 4 + column], width, label=label_x_p)
+            axs[column, row].bar(x + width / 2, contributionRich[row * 4 + column], width, label=label_x_r)
+            axs[column, row].legend(loc=1, prop={'size': 6})
+            axs[column, row].set_ylim([0, 4])
 
     axs[0, 0].set_title(r"Every round")
     axs[0, 1].set_title(r"First round")
