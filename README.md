@@ -1,3 +1,5 @@
+# INFO: ONLY MAIN4 IS MEANT TO BE USED
+
 # INFOF409-project
 The best `project` so far.
 
