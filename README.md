@@ -2,8 +2,8 @@
 The best `project` so far.
 
 15 experiments
-500 games
-50 Richs 50 Poors
+300 games
+20 Richs 20 Poors
 1000 generations
 lambda3 = 10
 
